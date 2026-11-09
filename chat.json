@@ -1,0 +1,84 @@
+{
+  "project": "Transit realtime system",
+  "status": "Backend fully working, map not receiving MQTT messages",
+  "environment": {
+    "os": "Windows",
+    "docker": true,
+    "services": [
+      "db (postgres)",
+      "api (fastapi/uvicorn)",
+      "runtime (simulation + fusion + MQTT publisher)"
+    ]
+  },
+  "gtfs": {
+    "city": "sofia",
+    "import": "successful",
+    "counts": {
+      "stops": 4352,
+      "routes": 186,
+      "services": 2328,
+      "trips": 28345,
+      "stop_times": 661749
+    }
+  },
+  "gtfs_rt": {
+    "working": true,
+    "feeds": [
+      "vehicle_positions",
+      "trip_updates",
+      "alerts"
+    ],
+    "fusion": {
+      "rt": 300,
+      "simulated": 300,
+      "matched": 220,
+      "fused": 370
+    }
+  },
+  "stop_arrivals": {
+    "status": "fixed",
+    "previous_issue": "time filter too strict",
+    "current_output": {
+      "upcoming_rows": 4600,
+      "stops_published": 2300
+    }
+  },
+  "mqtt_backend": {
+    "host": "host.docker.internal",
+    "port": 1883,
+    "topic_prefix": "transit",
+    "publishing": true,
+    "topics": "transit/sofia/routes/<route_id>/snapshot"
+  },
+  "mqtt_broker": {
+    "type": "mosquitto",
+    "config": {
+      "listener_1883": true,
+      "websockets_enabled": false
+    }
+  },
+  "map": {
+    "file": "map.html",
+    "status": "connects but receives no messages",
+    "current_display": {
+      "status": "Reconnecting or Connected",
+      "vehicles": 0
+    },
+    "current_topic": "prefix/sofia/routes/+/snapshot",
+    "current_ws_url": "ws://127.0.0.1:9001"
+  },
+  "known_issues": [
+    "map uses wrong topic prefix (should be 'transit', not 'prefix')",
+    "browser connects to WebSocket broker at port 9001, but mosquitto config has no websocket listener",
+    "runtime publishes to MQTT TCP (1883), not WebSocket",
+    "likely broker mismatch between runtime and browser"
+  ],
+  "goal": "make map receive and display live vehicles",
+  "likely_fix": [
+    "enable websockets in mosquitto (listener 9001, protocol websockets)",
+    "or connect map to correct broker WebSocket endpoint",
+    "ensure topic prefix = transit",
+    "ensure topic = transit/sofia/routes/+/snapshot",
+    "ensure map parses snapshot payload (vehicles array)"
+  ]
+}

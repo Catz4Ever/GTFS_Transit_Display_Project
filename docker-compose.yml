@@ -1,0 +1,49 @@
+services:
+  db:
+    image: postgres:16
+    container_name: transit-postgres
+    environment:
+      POSTGRES_DB: transit_db
+      POSTGRES_USER: transit_user
+      POSTGRES_PASSWORD: transit_pass123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  api:
+    build: .
+    container_name: transit-api
+    working_dir: /app
+    env_file:
+      - .env
+    command: python -m uvicorn app.api.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+      - .:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  runtime:
+    build: .
+    container_name: transit-runtime
+    working_dir: /app
+    env_file:
+      - .env
+    command: python -m app.runtime.manager
+    volumes:
+      - .:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

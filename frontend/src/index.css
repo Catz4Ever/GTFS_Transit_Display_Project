@@ -1,0 +1,527 @@
+:root {
+  /* Brand palette */
+  --color-cherry: #c33149;
+  --color-green: #a8c256;
+  --color-wheat: #f3d9b1;
+  --color-camel: #c29979;
+  --color-red-brown: #a22522;
+
+  /* App surface system */
+  --surface-page: #100f0e;
+  --surface-shell: #13100f;
+  --surface-panel: #1b1614;
+  --surface-panel-elevated: #241d1a;
+  --surface-input: #171311;
+  --surface-hover: #2c231f;
+  --surface-selected: color-mix(in srgb, var(--color-cherry) 30%, var(--surface-panel-elevated));
+
+  /* Text system */
+  --text-primary: #fff8ee;
+  --text-secondary: color-mix(in srgb, var(--color-wheat) 78%, transparent);
+  --text-muted: color-mix(in srgb, var(--color-wheat) 55%, transparent);
+  --text-inverse: #100f0e;
+
+  /* Semantic colors */
+  --accent-primary: var(--color-cherry);
+  --accent-primary-strong: var(--color-red-brown);
+  --accent-live: var(--color-green);
+  --accent-warning: var(--color-camel);
+  --accent-danger: var(--color-red-brown);
+  --accent-route: var(--color-cherry);
+  --accent-stop: var(--color-wheat);
+
+  /* Borders and shadows */
+  --border-subtle: color-mix(in srgb, var(--color-camel) 18%, transparent);
+  --border-strong: color-mix(in srgb, var(--color-camel) 42%, transparent);
+  --shadow-soft: 0 18px 50px rgb(0 0 0 / 45%);
+  --shadow-panel: 0 16px 40px rgb(0 0 0 / 35%);
+
+  /* Layout tokens */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 14px;
+  --space-xl: 18px;
+  --topbar-height: 56px;
+  --panel-width: 360px;
+
+  /* MapLibre popup tokens */
+  --popup-background: color-mix(in srgb, var(--surface-panel) 96%, black);
+  --popup-border: var(--border-strong);
+  --popup-tip: var(--popup-background);
+  --popup-route-badge: var(--accent-primary);
+  --popup-time: var(--accent-live);
+  /* Map canvas styling tokens — must be plain hex/rgb, no color-mix().
+     MapLibre's paint parser does not understand CSS color functions. */
+  --map-route-halo:            #100f0e;
+  --map-route-line:            #c33149;
+  --map-route-stop-fill:       #fff8ee;
+  --map-normal-stop-fill:      #1b1614;
+  --map-route-stop-stroke:     #c33149;
+  --map-normal-stop-stroke:    #c29979;
+  --map-stop-label:            #c9a97e;
+  --map-text-halo:             #100f0e;
+  --map-vehicle-fill:          #c33149;
+  --map-vehicle-selected-stroke: #a8c256;
+  --map-vehicle-stroke:        #f3d9b1;
+  --map-vehicle-label:         #ffffff;
+  --map-vehicle-label-halo:    #c33149;
+  --map-vehicle-arrow:         #fff8ee;
+  --map-vehicle-arrow-halo:    #a22522;
+  --map-raster-opacity:        0.78;
+  --map-raster-saturation:     -0.45;
+  --map-raster-contrast:       -0.08;
+
+}
+
+
+/* ── Light theme ─────────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --surface-page:              #f5f0ea;
+  --surface-shell:             #ede8e1;
+  --surface-panel:             #ffffff;
+  --surface-panel-elevated:    #f8f4ef;
+  --surface-input:             #ffffff;
+  --surface-hover:             #ece7e0;
+  --surface-selected:          color-mix(in srgb, var(--color-cherry) 12%, #ffffff);
+
+  --text-primary:              #1c1410;
+  --text-secondary:            #4a3a30;
+  --text-muted:                #7a6458;
+  --text-inverse:              #fff8ee;
+
+  --border-subtle:             color-mix(in srgb, var(--color-camel) 28%, transparent);
+  --border-strong:             color-mix(in srgb, var(--color-camel) 56%, transparent);
+  --shadow-soft:               0 18px 50px rgb(0 0 0 / 15%);
+  --shadow-panel:              0 16px 40px rgb(0 0 0 / 12%);
+
+  --popup-background:          color-mix(in srgb, #ffffff 96%, var(--surface-panel));
+  --popup-border:              var(--border-strong);
+  --popup-tip:                 #ffffff;
+
+  /* Map tokens — plain hex only */
+  --map-route-halo:            #f5f0ea;
+  --map-route-line:            #c33149;
+  --map-route-stop-fill:       #1c1410;
+  --map-normal-stop-fill:      #ffffff;
+  --map-route-stop-stroke:     #c33149;
+  --map-normal-stop-stroke:    #c29979;
+  --map-stop-label:            #4a3a30;
+  --map-text-halo:             #f5f0ea;
+  --map-vehicle-fill:          #c33149;
+  --map-vehicle-selected-stroke: #a8c256;
+  --map-vehicle-stroke:        #1c1410;
+  --map-vehicle-label:         #ffffff;
+  --map-vehicle-label-halo:    #c33149;
+  --map-vehicle-arrow:         #ffffff;
+  --map-vehicle-arrow-halo:    #a22522;
+  --map-raster-opacity:        0.88;
+  --map-raster-saturation:     0.05;
+  --map-raster-contrast:       0.02;
+}
+
+[data-theme="light"] .topbar-select {
+  background: #ffffff;
+  color: #1c1410;
+  border-color: #c8b49a;
+}
+
+[data-theme="light"] .topbar-select:focus {
+  border-color: #c33149;
+  box-shadow: 0 0 0 1px rgba(195, 49, 73, 0.25);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--surface-page);
+  color: var(--text-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.vehicle-popup__stop-time--rt {
+  color: #4caf50; 
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* MapLibre popup shell reset. Popup content is rendered outside React, so this must be global. */
+.maplibregl-popup-content {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: var(--radius-lg) !important;
+}
+
+.maplibregl-popup-tip {
+  border-top-color: var(--popup-tip) !important;
+  border-bottom-color: var(--popup-tip) !important;
+}
+
+.maplibregl-popup-close-button {
+  color: var(--text-primary) !important;
+  font-size: 18px;
+  padding: 6px 8px;
+  opacity: 0.82;
+}
+
+.maplibregl-popup-close-button:hover {
+  opacity: 1;
+  background: transparent !important;
+}
+
+.vehicle-popup {
+  min-width: 300px;
+  max-width: 380px;
+  padding: var(--space-lg);
+  border: 1px solid var(--popup-border);
+  border-radius: var(--radius-lg);
+  background: var(--popup-background);
+  color: var(--text-primary);
+  font-family: inherit;
+  box-shadow: var(--shadow-soft);
+}
+
+.vehicle-popup__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.vehicle-popup__route,
+.vehicle-popup__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 5px 9px;
+  border-radius: 10px;
+  background: var(--popup-route-badge);
+  color: var(--text-primary);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.vehicle-popup__source {
+  font-weight: 800;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.vehicle-popup__meta {
+  margin: 4px 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.vehicle-popup__stops {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vehicle-popup__stops li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 13px;
+}
+
+.vehicle-popup__stops span {
+  color: var(--text-primary);
+}
+
+.vehicle-popup__stops strong {
+  color: var(--popup-time);
+  white-space: nowrap;
+}
+
+
+.vehicle-popup__stop-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.vehicle-popup__stop-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.vehicle-popup__stop-time {
+  color: var(--text-muted);
+  font-size: 11px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.vehicle-popup__eta {
+  color: var(--accent-live);
+  font-weight: 800;
+  font-size: 11px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 36px;
+  text-align: right;
+}
+
+.vehicle-popup__empty {
+  padding-top: var(--space-sm);
+  color: var(--text-muted);
+  list-style: none;
+}
+
+
+/* --- TopBar compact mode + no-overlap fix --- */
+.topbar {
+  gap: 8px;
+  min-width: 0;
+  overflow: visible;
+}
+
+.topbar-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.topbar-mode {
+  flex: 0 0 auto;
+}
+
+.topbar-mode .topbar-select {
+  width: 96px;
+  min-width: 96px;
+  max-width: 96px;
+  height: 32px;
+  min-height: 32px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.topbar-select {
+  background: #17100d;
+  color: #f4e7d0;
+  border: 1px solid #5a4032;
+  border-radius: 8px;
+  min-height: 32px;
+  outline: none;
+}
+
+.topbar-select:focus {
+  border-color: #9b6b52;
+  box-shadow: 0 0 0 1px rgba(155, 107, 82, 0.35);
+}
+
+.topbar-line-select {
+  flex: 1 1 420px;
+  min-width: 240px;
+  max-width: 46vw;
+}
+
+.topbar-station-input,
+.topbar input[type="text"] {
+  flex: 0 1 250px;
+  width: 250px;
+  min-width: 160px;
+  max-width: 250px;
+}
+
+.topbar-status,
+.subscription-status {
+  flex: 0 1 340px;
+  min-width: 120px;
+  max-width: 340px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+@media (max-width: 1250px) {
+  .topbar {
+    gap: 6px;
+  }
+
+  .topbar-mode .topbar-select {
+    width: 86px;
+    min-width: 86px;
+    max-width: 86px;
+    font-size: 13px;
+  }
+
+  .topbar-line-select {
+    min-width: 190px;
+    max-width: 34vw;
+  }
+
+  .topbar-station-input,
+  .topbar input[type="text"] {
+    width: 190px;
+    min-width: 130px;
+    max-width: 190px;
+  }
+
+  .topbar-status,
+  .subscription-status {
+    flex-basis: 220px;
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 980px) {
+  .topbar-status,
+  .subscription-status {
+    display: none;
+  }
+
+  .topbar-line-select {
+    max-width: 42vw;
+  }
+}
+
+.subscription-status {
+  margin-left: auto;
+  padding-left: 12px;
+  white-space: nowrap;
+}
+
+
+/* --- Stop alerts in side panel --- */
+.stop-alert {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(201,79,0,0.12);
+  border-left: 3px solid #c94f00;
+  margin: 4px 0;
+  font-size: 12px;
+}
+.stop-alert__icon { color: #ff9444; }
+.stop-alert__effect { color: #ff9444; font-weight: 700; }
+.stop-alert__header { color: var(--text-secondary); }
+
+/* --- Vehicle popup alerts --- */
+.vehicle-popup__alert {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 4px 0;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 11px;
+}
+.vehicle-popup__alert-icon { color: #ff9444; }
+.vehicle-popup__alert-effect { color: #ff9444; font-weight: 700; }
+.vehicle-popup__alert-header { color: var(--text-secondary); }
+
+/* --- Vehicle type legend --- */
+.legend {
+  padding: 10px 14px 14px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+.legend-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.legend-row {
+  transition: opacity 0.15s ease;
+}
+.legend-row--active {
+  font-weight: 600;
+}
+
+/* Popup minimize/close controls */
+.vehicle-popup__controls {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.vehicle-popup__minimize,
+.vehicle-popup__close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.vehicle-popup__minimize:hover,
+.vehicle-popup__close:hover {
+  background: var(--surface-hover, rgba(255,255,255,0.1));
+  color: var(--text-primary);
+}
+
+/* Minimized state — hide everything below header */
+.vehicle-popup--minimized .vehicle-popup__meta,
+.vehicle-popup--minimized .vehicle-popup__alert,
+.vehicle-popup--minimized .vehicle-popup__stop-row,
+.vehicle-popup--minimized .vehicle-popup__empty {
+  display: none;
+}

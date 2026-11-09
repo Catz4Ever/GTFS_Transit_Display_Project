@@ -1,0 +1,190 @@
+/* ── Stop Display Board — matches main app design ─────────────────────────── */
+
+.sd-shell {
+  min-height: 100vh;
+  background: var(--surface-page, #18120e);
+  color: var(--text-primary, #f3d9b1);
+  display: flex;
+  flex-direction: column;
+  font-family: "Anthropic Sans", "Inter", "Arial", sans-serif;
+}
+
+/* Header */
+.sd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  background: color-mix(in srgb, var(--surface-shell, #111) 96%, transparent);
+  border-bottom: 1px solid var(--border-subtle, rgba(194,153,121,0.18));
+}
+
+.sd-stop-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sd-stop-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary, #f3d9b1);
+  letter-spacing: 0.01em;
+}
+
+.sd-stop-id {
+  font-size: 12px;
+  color: var(--text-muted, rgba(243,217,177,0.55));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sd-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.sd-clock {
+  font-size: 40px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-wheat, #f3d9b1);
+  letter-spacing: 0.04em;
+}
+
+.sd-status {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.sd-status--ok {
+  color: var(--accent-live, #a8c256);
+}
+
+.sd-status--err {
+  color: var(--accent-danger, #a22522);
+}
+
+/* Table header */
+.sd-main {
+  flex: 1;
+  padding: 0 32px 24px;
+}
+
+.sd-empty {
+  text-align: center;
+  padding: 60px 0;
+  font-size: 18px;
+  color: var(--text-muted, rgba(243,217,177,0.55));
+}
+
+.sd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 20px;
+}
+
+.sd-th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted, rgba(243,217,177,0.55));
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--border-subtle, rgba(194,153,121,0.18));
+}
+
+.sd-th--eta {
+  text-align: right;
+}
+
+.sd-row {
+  border-bottom: 1px solid var(--border-subtle, rgba(194,153,121,0.1));
+}
+
+.sd-row:hover {
+  background: rgba(243,217,177,0.03);
+}
+
+.sd-td {
+  padding: 16px 16px;
+  vertical-align: middle;
+}
+
+.sd-td--dest {
+  color: var(--text-secondary, rgba(243,217,177,0.78));
+}
+
+.sd-td--vehicle {
+  color: var(--text-muted, rgba(243,217,177,0.55));
+  font-size: 15px;
+}
+
+.sd-td--time {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary, rgba(243,217,177,0.78));
+}
+
+.sd-td--eta {
+  text-align: right;
+  font-weight: 700;
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted, rgba(243,217,177,0.55));
+  white-space: nowrap;
+}
+
+.sd-td--highlight {
+  color: var(--accent-live, #a8c256);
+}
+
+.sd-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm, 6px);
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  min-width: 48px;
+  text-align: center;
+  background: var(--accent-primary, #c33149);
+  letter-spacing: 0.02em;
+}
+
+/* Footer */
+.sd-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  background: color-mix(in srgb, var(--surface-shell, #111) 96%, transparent);
+  border-top: 1px solid var(--border-subtle, rgba(194,153,121,0.18));
+  font-size: 12px;
+  color: var(--text-muted, rgba(243,217,177,0.55));
+}
+
+.sd-back {
+  color: var(--accent-primary, #c33149);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sd-back:hover {
+  color: var(--color-wheat, #f3d9b1);
+}
+
+/* Large display scaling */
+@media (min-width: 1920px) {
+  .sd-stop-name { font-size: 34px; }
+  .sd-clock { font-size: 52px; }
+  .sd-table { font-size: 24px; }
+  .sd-td { padding: 20px 20px; }
+  .sd-td--eta { font-size: 28px; }
+  .sd-badge { font-size: 22px; padding: 6px 16px; }
+}

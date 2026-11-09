@@ -1,0 +1,11 @@
+psycopg[binary,pool]
+python-dotenv
+fastapi
+uvicorn
+paho-mqtt
+python-multipart
+gtfs-realtime-bindings
+cryptography
+pytest
+pytest-asyncio
+httpx

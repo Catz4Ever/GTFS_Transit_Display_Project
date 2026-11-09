@@ -1,0 +1,40 @@
+docker compose exec db psql -U transit_user -d transit_db
+PS C:\Program Files\mosquitto> .\mosquitto.exe -c C:\mosquitto\mosquitto.conf
+cd 'C:\Program Files\mosquitto'
+.\mosquitto.exe -c C:\mosquitto\mosquitto.conf
+python -m uvicorn api_service:app --reload --host 0.0.0.0 --port 8000
+python -m http.server 8080
+
+$env:DB_HOST="localhost"
+$env:DB_PORT="5432"
+python .\gtfs_loader.py --zip .\imports\plovdiv_gtfs.zip --city-code plovdiv --city-name Plovdiv --replace
+python .\gtfs_loader.py --zip .\imports\sofia_gtfs.zip --city-code sofia --city-name Sofia --replace
+
+docker compose up -d db mqtt api
+docker compose run -d --name sim-plovdiv -e SIM_CITY_CODE=plovdiv sim-worker
+docker compose run -d --name sim-sofia -e SIM_CITY_CODE=sofia sim-worker
+docker rm -f sim-plovdiv sim-sofia
+
+docker compose down --remove-orphans
+docker compose build
+docker compose up -d
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+
+
+spatial correctness
+movement realism
+GTFS-RT ingestion
+fusion
+frontend/performance
+deployment polish
+
+http://api.511.org/transit/datafeeds?api_key=10afaa91-232d-4b79-9019-8cc6fd396c2e&operator_id=SF
+http://api.511.org/transit/vehiclepositions?api_key=10afaa91-232d-4b79-9019-8cc6fd396c2e&agency=SF
+http://api.511.org/transit/tripupdates?api_key=10afaa91-232d-4b79-9019-8cc6fd396c2e&agency=SF 
+http://api.511.org/transit/servicealerts?api_key=10afaa91-232d-4b79-9019-8cc6fd396c2e&agency=SF
+
+спирката към която ходиш кои други автобуси можеш да се качиш на тях
+едната спирка е отделен subscriber, за показва само тези близки автобуси идващи
+draw.io 
+
+http://api.511.org/transit/datafeeds?api_key=10afaa91-232d-4b79-9019-8cc6fd396c2e&operator_id=SF
